@@ -33,5 +33,5 @@ if __name__ == "__main__":
             favorites = view_favorite_quotes()
             for favorite in favorites:
                 print(favorite)
-    else:
+    else: 
         print("Category not found.")
