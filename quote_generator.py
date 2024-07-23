@@ -3,7 +3,7 @@ import random
 import sys
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, 
-    QLineEdit, QMessageBox, QTextEdit, QHBoxLayout, QComboBox, QSizePolicy
+    QLineEdit, QMessageBox, QTextEdit, QComboBox
 )
 from PyQt5.QtGui import QFont
 
@@ -30,7 +30,10 @@ def search_quotes(quotes, keyword):
 def save_favorite_quote(quote, filename='favorites.json'):
     try:
         with open(filename, 'r') as file:
-            favorites = json.load(file)
+            try:
+                favorites = json.load(file)
+            except json.JSONDecodeError:
+                favorites = []
     except FileNotFoundError:
         favorites = []
 
@@ -42,7 +45,10 @@ def save_favorite_quote(quote, filename='favorites.json'):
 def view_favorite_quotes(filename='favorites.json'):
     try:
         with open(filename, 'r') as file:
-            favorites = json.load(file)
+            try:
+                favorites = json.load(file)
+            except json.JSONDecodeError:
+                favorites = []
     except FileNotFoundError:
         favorites = []
     return favorites
